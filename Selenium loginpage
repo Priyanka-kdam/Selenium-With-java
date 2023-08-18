@@ -1,0 +1,47 @@
+package prjSelenium;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class SelINtro {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//Invoking the browse
+		//Chrome -chromeDriver- get,close, gettitle
+		//Firefox- FirefoxDriver-get, Close,gettitle
+		//Edge-EdgeDriver-get,close,gettitle
+		//Safari-safariDriver-get,close,gettitle
+		//Interface-WebDriver(is not a class,it is a interface)
+		//WebDriver Interface contaons abstract methods-Methods without body- and those mothods are defined in each driverclass
+		
+		
+		WebDriverManager.chromedriver().setup();// Setting up the chromeDriver
+
+		WebDriver driver=new ChromeDriver();// Initialize the webdriver
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+     
+		driver.get("https://rahulshettyacademy.com/locatorspractice/");
+        System.out.println("Browser is Started");
+
+     // Reading the Titile of the page
+	   System.out.println("The title of the page is:" + driver.getTitle());
+  	   // Reading the current URL of the Website displayed int he browser of the page
+       System.out.println("The current URL IS: " + driver.getCurrentUrl());
+	   
+      // closing the current browser
+       driver.close();
+       // closing all instances of browswe opened by selenium
+       //driver.quit();
+	
+	
+	
+	}
+
+}
