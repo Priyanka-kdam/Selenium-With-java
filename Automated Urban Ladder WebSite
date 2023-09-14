@@ -1,0 +1,48 @@
+package prjSelenium;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Urbanladder {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver=new ChromeDriver();
+        
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().window().maximize();
+        //go to website
+        driver.get("https://www.urbanladder.com/");
+        //Thread.sleep(2000);
+        driver.findElement(By.cssSelector("li[class='topnav_item livingunit'] span[class='topnav_itemname']")).click();
+        // to click on bookshelves
+        driver.findElement(By.xpath("(//span[contains(text(),'Bookshelves')])[1]")).click();
+        // to close advertise
+        driver.findElement(By.cssSelector(".close-reveal-modal.hide-mobile")).click();
+        //to click on price
+        driver.findElement(By.cssSelector("li[data-group='price'] div[class='gname']")).click();
+        //to click on price limit
+        driver.findElement(By.id("price_limit_4500-8999")).click();
+        //to click on storage type
+        
+        Thread.sleep(2000);
+        driver.findElement(By.cssSelector("li[data-group='storage type']")).click();
+        // to click on open storage type
+        driver.findElement(By.id("filters_storage_type_Open")).click();
+        // to click on recommended
+        driver.findElement(By.cssSelector("div[class='gname'] span")).click();
+        //to click on High to Low
+        driver.findElement(By.cssSelector("li[data-key='price_desc']")).click();
+        
+        
+       
+	}
+
+}
