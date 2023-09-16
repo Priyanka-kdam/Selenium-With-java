@@ -1,0 +1,45 @@
+package prjSelenium;
+
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class AutoSuggestDropdwn {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		WebDriverManager.chromedriver().setup();
+        WebDriver driver=new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+	    driver.manage().window().maximize();
+	    
+	    driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+	    driver.findElement(By.id("autosuggest")).sendKeys("ind");
+	    
+	   // to display list we want to iteraate to java
+	    List<WebElement> options =driver.findElements(By.cssSelector("li[class='ui-menu-item'] a"));
+	    // In option our  3options read  
+	    // in for loop we are comprising in list option if their is india avaialabl then it will be click
+	    for (WebElement x:options) //for each element  of this list
+	    {
+	    	if(x.getText().equalsIgnoreCase("India"))//equalignorecase is case sensitive i/i no matter
+	    	{
+	    		x.click();
+	    		break;
+	    	}
+	    		
+	    		
+	    }
+	    
+	
+	
+	}
+
+}
