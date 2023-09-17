@@ -1,0 +1,79 @@
+package prjSelenium;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class DeepThought {
+    public WebDriver driver;
+    public static void main(String[] args) throws InterruptedException, IOException{
+    
+        // Setting up WebDriver
+       
+    	File file=new File("Utilites\\DeepThoughtURL.properties");
+    	FileInputStream fileinput = new FileInputStream(file);
+    	Properties prop= new Properties();
+    	prop.load(fileinput);
+    	String Browsername= prop.getProperty("Browsername");
+    	
+    	if (Browsername.matches("Chrome")) {
+    		 WebDriverManager.chromedriver().setup();
+    	     WebDriver driver = new ChromeDriver();
+    	}
+    	if(Browsername.matches("Firefox")) {
+    		WebDriverManager.firefoxdriver().setup();
+   	     WebDriver driver = new FirefoxDriver();
+    		
+    	}
+    	WebDriverManager.chromedriver().setup();
+	    WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().window().maximize();
+    
+        // Test Scenario 1: Successful Login
+        driver.get("https://dev.deepthought.education/login");
+        // To enter username/email
+        driver.findElement(By.id("username")).sendKeys("kadampiu0");
+        // To enter password
+        Thread.sleep(2000);
+        driver.findElement(By.id("password")).sendKeys("Priyanka");
+        // To click on Login
+        driver.findElement(By.id("login")).click();
+        System.out.println("Login Sucessful");
+    
+        // Add validation for successful login 
+
+        // Close the browser after successful login
+        driver.close();
+    
+        // Test Scenario 2: Unsuccessful Login
+        // Open a new instance of the browser
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().window().maximize();
+        driver.get("https://dev.deepthought.education/login");
+
+        // To enter username/email (with incorrect credentials)
+        driver.findElement(By.id("username")).sendKeys("@kadampiu0");
+        // To enter an incorrect password
+        driver.findElement(By.id("password")).sendKeys("IncorrectPassword");
+        // To click on Login (with incorrect credentials)
+        driver.findElement(By.id("login")).click();
+        System.out.println("Login Unsucessful");
+
+        // Add validation for unsuccessful login (e.g., check for error messages)
+
+        // Close the browser after unsuccessful login
+        driver.close();
+    
+    }
+}
