@@ -1,0 +1,40 @@
+package prjSelenium;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Drag_Drop {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+ 
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver=new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.manage().window().maximize();
+        
+        driver.get("https://demo.guru99.com/test/drag_drop.html");
+        
+        WebElement From=driver.findElement(By.xpath("//*[@class=\"block14 ui-draggable\"]"));
+	
+        WebElement To=driver.findElement(By.xpath("//*[@id='bank']/li"));
+        //To perform drag and drop functionality
+        // To add account Bank 
+        Actions act=new Actions(driver);
+        act.dragAndDrop(From, To).build().perform();
+	   
+        WebElement From1=driver.findElement(By.xpath("//*[@id=\"credit\"]"));
+        WebElement To1=driver.findElement(By.cssSelector("*[id=\"amt7\"]"));
+	
+        Actions act1=new Actions(driver);
+        act.dragAndDrop(From1, To1).build().perform();
+	}
+
+}
