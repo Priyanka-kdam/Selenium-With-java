@@ -1,0 +1,46 @@
+package prjSelenium;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Checkboxes {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		WebDriverManager.chromedriver().setup();
+        WebDriver driver=new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+	    driver.manage().window().maximize();
+	    
+	   
+	   driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+	  
+	// To click all checkboxes at a time 
+	   System.out.println(driver.findElements(By.cssSelector("input[type='checkbox']")).size());
+	  //when we need to print 2 or more object we need to add "FindElementS" for Size method
+	   
+	   
+	   // to see one way check box is default clicked or not
+	    System.out.println(driver.findElement(By.id("ctl00_mainContent_rbtnl_Trip_0")).isSelected());
+	    //To click round trip check box
+	    driver.findElement(By.id("ctl00_mainContent_rbtnl_Trip_1")).click();
+	    // To See checkbox is cliakable or not if is clickabkle true
+	    System.out.println(driver.findElement(By.id("ctl00_mainContent_rbtnl_Trip_1")).isSelected());
+		      
+	    //To check family and friends checkbox is clickable or not it is not so false
+	    System.out.println(driver.findElement(By.id("ctl00_mainContent_chk_friendsandfamily")).isSelected());
+	    // To click Checkbox
+	    driver.findElement(By.id("ctl00_mainContent_chk_friendsandfamily")).click();
+	    // To see is clickable or not result is pass
+	    System.out.println(driver.findElement(By.id("ctl00_mainContent_chk_friendsandfamily")).isSelected());
+		
+	
+	
+	}
+
+}
