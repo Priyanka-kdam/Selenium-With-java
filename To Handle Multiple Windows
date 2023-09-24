@@ -1,0 +1,56 @@
+package prjSelenium;
+
+import java.time.Duration;
+import java.util.Iterator;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class MultipleWindowsHandler {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver=new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+        
+		driver.manage().window().maximize();
+        
+        driver.get("https://rahulshettyacademy.com/loginpagePractise/");
+        driver.findElement(By.cssSelector(".blinkingText")).click();
+        //To make collections for all windows 
+        // getWindowHandle-parent window 
+	    // getWindowHandles- To all WIndows
+       
+        //set string  to iterate all webdriver windows
+        Set<String>windows=driver.getWindowHandles();
+	    
+        //to initilize iterator
+        Iterator<String> it=windows.iterator();
+        
+        while(it.hasNext()) {
+        	System.out.println(it.next());
+        
+        
+        Thread.sleep(3000);
+ 
+		String parentID=it.next();
+        String childID=it.next();
+        // to switch child id to window
+        Thread.sleep(5000);
+        driver.switchTo().window(childID);// how to switch new window
+        // to read text
+        driver.findElement(By.cssSelector("")).getText();
+        
+        		
+        }
+        
+        
+	}
+	}
+
+
